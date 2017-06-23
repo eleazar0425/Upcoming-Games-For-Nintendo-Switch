@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/all_games"
+        android:title="@string/all_games" />
+
+    <item
+        android:id="@+id/released_only"
+        android:title="@string/released" />
+
+    <item
+        android:id="@+id/not_released"
+        android:title="@string/not_released" />
+
+    <item
+        android:id="@+id/physical_release"
+        android:title="@string/physical_release_only"/>
+
+    <item
+        android:id="@+id/digital_release"
+        android:title="@string/digital_release_only"/>
+</menu>
