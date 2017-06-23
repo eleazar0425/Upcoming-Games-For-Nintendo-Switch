@@ -73,12 +73,4 @@ public class Game extends RealmObject{
     public void setPhysicalRelease(boolean physicalRelease) {
         this.physicalRelease = physicalRelease;
     }
-
-    public boolean isFavorite() {
-        return isFavorite;
-    }
-
-    public void setFavorite(boolean favorite) {
-        isFavorite = favorite;
-    }
 }
