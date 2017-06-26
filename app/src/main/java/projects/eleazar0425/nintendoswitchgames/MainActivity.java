@@ -11,7 +11,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-
 import com.github.clans.fab.FloatingActionButton;
 import com.github.rubensousa.bottomsheetbuilder.BottomSheetBuilder;
 import com.github.rubensousa.bottomsheetbuilder.BottomSheetMenuDialog;
@@ -52,9 +51,8 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                if(fragment != null){
-                    fragment.search(newText);
-                }
+                checkFragmentIsNotNull();
+                fragment.search(newText);
                 return false;
             }
         });
@@ -67,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onSearchViewClosed() {
+                checkFragmentIsNotNull();
                 fragment.search("");
             }
         });
@@ -124,6 +123,11 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private void checkFragmentIsNotNull(){
+        if(fragment == null)
+            fragment = (GameListFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+    }
+
     private void setupBottomSheetForSorting(){
         mBottomSheetDialog = new BottomSheetBuilder(this, coordinatorLayout)
                 .setMode(BottomSheetBuilder.MODE_LIST)
@@ -150,9 +154,7 @@ public class MainActivity extends AppCompatActivity {
                             default:
                                 orderBy = OrderingUtil.OrderBy.DATE;
                         }
-                        if(fragment == null)
-                            fragment = (GameListFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container);
-
+                        checkFragmentIsNotNull();
                         fragment.orderBy(orderBy);
                     }
                 }).expandOnStart(true)

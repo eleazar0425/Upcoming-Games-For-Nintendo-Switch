@@ -1,12 +1,12 @@
 <resources>
     <string name="app_name">Próximos juegos para Nintendo Switch</string>
     <string name="main_label">Próximos juegos</string>
-    <string name="no_of_player">No. of players: </string>
-    <string name="coming_on">Coming: </string>
+    <string name="no_of_player">Jugadores: </string>
+    <string name="coming_on">Se lanza en: </string>
     <string name="category">Category: </string>
-    <string name="days_to_release"> days to release</string>
+    <string name="days_to_release"> días para lanzarse</string>
     <string name="already_released">Released</string>
-    <string name="released_on">Released on</string>
+    <string name="released_on">Lanzado en</string>
     <string name="order_by_date">Por fecha de lanzamiento</string>
     <string name="order_by_title">Por título</string>
     <string name="by_lowest_price">Por precio mas bajo</string>

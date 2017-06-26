@@ -44,7 +44,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
     @Provides
     public Gson providesGson(){
-        return GsonProvider.provideGsonIntance();
+        return GsonProvider.provideGsonInstance();
     }
 
     @Provides

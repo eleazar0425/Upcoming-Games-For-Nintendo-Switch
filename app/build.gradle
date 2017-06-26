@@ -8,8 +8,8 @@ android {
         applicationId "projects.eleazar0425.nintendoswitchgames"
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 7
-        versionName "1.2.0"
+        versionCode 9
+        versionName "2.0.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

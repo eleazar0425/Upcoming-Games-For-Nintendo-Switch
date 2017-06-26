@@ -1,7 +1,6 @@
 package projects.eleazar0425.nintendoswitchgames.model;
 
 import com.google.gson.annotations.SerializedName;
-
 import io.realm.RealmObject;
 
 /**

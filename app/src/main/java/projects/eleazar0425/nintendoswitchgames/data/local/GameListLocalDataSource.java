@@ -16,22 +16,35 @@ public class GameListLocalDataSource implements GameListDataSource {
 
     private Realm realm;
 
+    /**
+     *
+     * @param realm
+     */
     public GameListLocalDataSource(Realm realm) {
         this.realm = realm;
     }
 
+    /**
+     *
+     * @param callBack
+     */
     @Override
     public void getGameList(OnGameListLoadedCallBack callBack) {
         RealmQuery<Game> query = realm.where(Game.class);
         RealmResults<Game> results = query.findAll();
         List<Game> gameList = realm.copyFromRealm(results);
         if(gameList.size() == 0){
+            //TODO remove hardcoded strings
             callBack.onError("There's no data available", new DataNoAvailableException());
         }else {
             callBack.onGameListLoaded(gameList);
         }
     }
 
+    /**
+     *
+     * @param gameList to save
+     */
     public void saveGameList(List<Game> gameList){
         realm.beginTransaction();
         realm.deleteAll();

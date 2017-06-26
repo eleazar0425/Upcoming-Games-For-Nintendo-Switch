@@ -49,6 +49,9 @@ public class GameListFragment extends Fragment implements GameListingContract.Vi
         DIGITAL_RELEASE
     }
 
+    private Filter filter;
+    private OrderingUtil.OrderBy orderBy;
+
     public static GameListFragment newInstance() {
         Bundle args = new Bundle();
         GameListFragment fragment = new GameListFragment();
@@ -127,6 +130,8 @@ public class GameListFragment extends Fragment implements GameListingContract.Vi
         if(pos != -1){
             recyclerView.scrollToPosition(pos);
         }
+        filter(filter);
+        orderBy(orderBy);
     }
 
     @Override
@@ -142,6 +147,11 @@ public class GameListFragment extends Fragment implements GameListingContract.Vi
     }
 
     public void orderBy(OrderingUtil.OrderBy orderBy){
+        orderBy(orderBy, false);
+    }
+
+    public void orderBy(OrderingUtil.OrderBy orderBy, boolean fromFilter){
+        if(orderBy == null) return;
         switch (orderBy){
             case DATE:
                 OrderingUtil.sort(gameList, OrderingUtil.OrderBy.DATE, "releaseDate");
@@ -156,9 +166,17 @@ public class GameListFragment extends Fragment implements GameListingContract.Vi
                 OrderingUtil.sort(gameList, OrderingUtil.OrderBy.NUMBER_DESCENDING, "price");
         }
         adapter.notifyDataSetChanged();
+        this.orderBy = orderBy;
+        if(!fromFilter)
+            filter(filter, true);
     }
 
     public void filter(Filter filter){
+        filter(filter, false);
+    }
+
+    public void filter(Filter filter, boolean fromOrderBy){
+        if(filter == null) return;
         switch (filter){
             case ALL_GAMES:
                 adapter.resetFilter();
@@ -209,6 +227,9 @@ public class GameListFragment extends Fragment implements GameListingContract.Vi
                 });
                 break;
         }
+        this.filter = filter;
+        if(!fromOrderBy)
+            orderBy(orderBy, true);
     }
 
     @Override

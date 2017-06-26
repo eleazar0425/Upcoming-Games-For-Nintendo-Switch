@@ -44,6 +44,6 @@ import projects.eleazar0425.nintendoswitchgames.net.service.GameListService;
     @Provides
     public GameListRepository providesRepository(Application context, GameListRemoteDataSource remoteDataSource,
                                                 GameListLocalDataSource localDataSource){
-        return  new GameListRepository(context, remoteDataSource, localDataSource);
+        return new GameListRepository(context, remoteDataSource, localDataSource);
     }
 }

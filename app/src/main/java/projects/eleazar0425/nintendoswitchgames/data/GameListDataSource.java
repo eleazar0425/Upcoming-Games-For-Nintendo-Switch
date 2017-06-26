@@ -10,7 +10,17 @@ import projects.eleazar0425.nintendoswitchgames.model.Game;
 public interface GameListDataSource {
 
     interface OnGameListLoadedCallBack {
+        /**
+         * Callback called when the data is loaded
+         * @param gameList
+         */
         void onGameListLoaded(List<Game> gameList);
+
+        /**
+         * Callback called in case of error
+         * @param message error message
+         * @param t exception thrown
+         */
         void onError(String message, Throwable t);
     }
 

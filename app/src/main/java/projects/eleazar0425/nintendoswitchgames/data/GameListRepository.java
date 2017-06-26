@@ -26,11 +26,13 @@ public class GameListRepository implements GameListDataSource {
 
     @Override
     public void getGameList(final OnGameListLoadedCallBack callBack) {
+        //If there's network then try to get data from remote server
         if (NetworkAvailability.isNetworkAvailable(mContext)) {
             getDataFromRemoteDataSource(callBack);
             return;
         }
 
+        //if there's no network then try to get data from local source
         mLocalDataSource.getGameList(new OnGameListLoadedCallBack() {
             @Override
             public void onGameListLoaded(List<Game> gameList) {
@@ -44,6 +46,10 @@ public class GameListRepository implements GameListDataSource {
         });
     }
 
+    /**
+     *
+     * @param callBack
+     */
     private void getDataFromRemoteDataSource(final OnGameListLoadedCallBack callBack){
         mRemoteDataSource.getGameList(new OnGameListLoadedCallBack() {
             @Override
@@ -54,6 +60,7 @@ public class GameListRepository implements GameListDataSource {
 
             @Override
             public void onError(String message, Throwable t) {
+                //If there was an error then try to get data from local source
                 mLocalDataSource.getGameList(callBack);
             }
         });

@@ -8,7 +8,7 @@ import com.google.gson.GsonBuilder;
  */
 
 public class GsonProvider {
-    public static Gson provideGsonIntance(){
+    public static Gson provideGsonInstance(){
         return new GsonBuilder().create();
     }
 }

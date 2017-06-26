@@ -1,7 +1,6 @@
 package projects.eleazar0425.nintendoswitchgames.view.gamelisting;
 
 import android.app.Activity;
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,16 +10,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import javax.inject.Inject;
-
 import projects.eleazar0425.nintendoswitchgames.Application;
 import projects.eleazar0425.nintendoswitchgames.R;
 import projects.eleazar0425.nintendoswitchgames.di.component.DaggerToggleFavoriteComponent;
@@ -36,7 +31,7 @@ import projects.eleazar0425.nintendoswitchgames.view.gamelisting.togglefavorite.
 
 public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.GameListViewHolder> {
 
-    private List<Game> gameList, gameListCopy;
+    private List<Game> gameList, gameListCopy; //copy to maintain original list in case of filtering
     private Activity context;
 
     public GameListAdapter(List<Game> gameList, Activity context) {
@@ -61,19 +56,19 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.GameLi
 
 
         String daysToRelease = "";
-        String commingOn = "";
+        String comingOn = "";
         int days = DateUtil.getDaysBetweenDates(new Date(),
                                         DateUtil.parse(gameList.get(position).getReleaseDate()));
         if(days <= 0){
             daysToRelease = context.getString(R.string.already_released);
-            commingOn = context.getString(R.string.released_on) + " " + gameList.get(position).getReleaseDate();
+            comingOn = context.getString(R.string.released_on) + " " + gameList.get(position).getReleaseDate();
         }else{
             daysToRelease = String.valueOf(days)+" "+context.getString(R.string.days_to_release);
-            commingOn = context.getString(R.string.coming_on) + " " + gameList.get(position).getReleaseDate();
+            comingOn = context.getString(R.string.coming_on) + " " + gameList.get(position).getReleaseDate();
         }
 
         holder.daysToRelease.setText(daysToRelease);
-        holder.comingDate.setText(commingOn);
+        holder.comingDate.setText(comingOn);
 
         String isPhysicalRelease =  gameList.get(position).isPhysicalRelease()
                 ? context.getString(R.string.yes) : context.getString(R.string.no);
@@ -86,7 +81,6 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.GameLi
         String price = gameList.get(position).getPrice().equals("-1")
                 ? "TBA" : "$"+gameList.get(position).getPrice();
         holder.price.setText(price);
-
 
         Glide.with(holder.boxArt.getContext())
                 .load(gameList.get(position).getBoxArt())
@@ -114,10 +108,6 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.GameLi
     public void clear(){
         this.gameListCopy.clear();
         this.gameList.clear();
-    }
-
-    public interface FilterPredicate {
-        boolean filter(Game game);
     }
 
     public void filter(FilterPredicate filerPredicate){
@@ -205,5 +195,9 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.GameLi
                     .build()
                     .inject(this);
         }
+    }
+
+    public interface FilterPredicate {
+        boolean filter(Game game);
     }
 }

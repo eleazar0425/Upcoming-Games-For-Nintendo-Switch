@@ -1,10 +1,6 @@
 package projects.eleazar0425.nintendoswitchgames.net;
 
-
-import android.support.annotation.NonNull;
-
 import java.util.concurrent.TimeUnit;
-
 import okhttp3.OkHttpClient;
 
 /**

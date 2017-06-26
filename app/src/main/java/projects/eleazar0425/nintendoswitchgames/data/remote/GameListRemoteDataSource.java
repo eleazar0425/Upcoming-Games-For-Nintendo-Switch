@@ -17,6 +17,10 @@ public class GameListRemoteDataSource implements GameListDataSource {
 
     private GameListService service;
 
+    /**
+     *
+     * @param service required service for requesting data
+     */
     public GameListRemoteDataSource(GameListService service) {
         this.service = service;
     }
@@ -30,6 +34,7 @@ public class GameListRemoteDataSource implements GameListDataSource {
                 if(response.body() != null && response.isSuccessful()){
                     callBack.onGameListLoaded(response.body());
                 }else {
+                    //TODO remove hardcoded strings
                     callBack.onError("Data no available", new DataNoAvailableException());
                 }
             }
@@ -37,6 +42,7 @@ public class GameListRemoteDataSource implements GameListDataSource {
             @Override
             public void onFailure(Call<List<Game>> call, Throwable t) {
                 //TODO this need an error handling to figure out what type of error was
+                //TODO remove hardcoded strings
                 callBack.onError("There was a network error", t);
             }
         });
