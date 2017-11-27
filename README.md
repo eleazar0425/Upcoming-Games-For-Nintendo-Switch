@@ -2,7 +2,7 @@
 Android App using MVP + Retrofit + OkHttp + Dagger2 + Gson + Glide + Realm
 
 
-This is an Android app using third party libraries commonly used in the comunity such as Dagger or Retrofit,
+This is an Android app using third party libraries commonly used in the community such as Dagger or Retrofit,
 combined with the architectural pattern: Model View Presenter.
 
 This app allows you to consult every game that is going to be released on Nintendo Switch and is up on Google Play.
